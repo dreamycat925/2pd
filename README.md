@@ -1,57 +1,75 @@
 # Two-Point Discrimination
 
-2点識別覚の検査者補助用 Streamlit アプリです。
+A Streamlit-based examiner-assist app for **two-point discrimination testing**.
 
-## 概要
+## Live App
 
-- 練習 / 本番 / 事後 の 3 フェーズ
-- 練習で 5 問連続正答してから本番に進む想定
-- 本番は 1点/2点 の 100 trial 系列
-- 2点 trial のみ 2-down 1-up staircase を更新
-- 開始 30 mm
-- 固定ラダー上を隣の段へ移動
-- 下限 1 mm / 上限 50 mm
-- 閾値は最後 6 reversals の中央値
+Use the public app here:
 
-## 本番系列
+**https://dreamycat925-2pd-2pd-discrimination-streamlit-app-2oanve.streamlit.app/**
 
-- 100 trial
-- 1点 40 trial
-- 2点 60 trial
-- 1点 / 2点 は 4 回以上連続しない
-- 系列 1 / 系列 2 / ランダム を選択可能
+## Overview
 
-## 本番停止条件
+- Three phases: **Practice**, **Main test**, and **Post-test check**
+- The main test uses a **100-trial** schedule with **40 one-point trials** and **60 two-point trials**
+- No stimulus type repeats **4 or more times in a row**
+- The staircase is updated **only on two-point trials**
+- Start level: **30 mm**
+- Fixed ladder: **1, 3, 5, 7, 9, 11, 13, 15, 20, 25, 30, 35, 40, 45, 50 mm**
+- The staircase moves to the **adjacent ladder level**
+- Lower bound: **1 mm**
+- Upper bound: **50 mm**
+- Formal threshold: **median of the last 6 reversals**
 
-- PASS: 1 mm の 2点 trial で 4 連続正答
-- FAIL: 50 mm の 2点 trial で 2 連続誤答
-- 収束完了: 10 reversals 到達
-- 収束不良: 100 trial 到達
+## Practice / Post-test Check
 
-## 練習 / 事後
+- Starts at **30 mm**
+- Uses **two-point trials only**
+- Ends with **PASS** after **5 consecutive correct responses**
+- If the participant makes **2 errors at the same mm**, the app steps up to the next higher level
+- If the participant makes **2 errors at 50 mm**, the phase ends as **FAIL**
 
-- 2点のみ 30 mm から開始
-- 5 問連続正答で PASS
-- 同一 mm で 2 問誤答すると上の mm に進む
-- 50 mm で 2 問誤答すると FAIL
+In usual use, the participant should achieve **5 consecutive correct responses in practice** before proceeding to the main test.
 
-通常は、まず練習で 5 問連続正答となったことを確認してから本番に進みます。
+## Main Test
 
-## 実行方法
+- Uses **2-down 1-up**
+- Uses the fixed ladder above
+- The app can use:
+  - **Series 1**
+  - **Series 2**
+  - **Random**
+
+### Main test stopping rules
+
+- **PASS**: **4 consecutive correct responses** on **two-point trials at 1 mm**
+- **FAIL**: **2 consecutive incorrect responses** on **two-point trials at 50 mm**
+- **Converged**: **10 reversals**
+- **Non-convergent**: **100 trials**
+
+## Output
+
+The app provides:
+
+- A line chart of the main-test course
+- A downloadable **TXT summary**
+- A downloadable **CSV log**
+
+## Recommended Workflow
+
+1. Run **Practice**
+2. Confirm **5 consecutive correct responses**
+3. Run the **Main test**
+4. Run the **Post-test check** if needed
+
+## Local Run
 
 ```bash
 pip install -r requirements.txt
 streamlit run 2pd_discrimination_streamlit_app.py
 ```
 
-## 推奨手順
+## Notes
 
-1. 練習を実施する
-2. 5 問連続正答を確認して本番に進む
-3. 本番を実施する
-4. 必要に応じて事後を実施する
-
-## 注意
-
-- 検査者補助アプリです
-- 医療機器ではありません
+- This is an **examiner support tool**
+- It is **not a medical device**

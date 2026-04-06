@@ -1,62 +1,62 @@
 # Two-Point Discrimination — Docker
 
-この Streamlit アプリを Docker / Docker Compose でローカル実行するためのメモです。
+Notes for running this Streamlit app locally with Docker / Docker Compose.
 
-## 通常起動
+## Standard Run
 
-リポジトリ直下で実行します。
+Run this in the project root:
 
 ```bash
 docker compose up -d --build
 ```
 
-開く URL:
+Open:
 
 ```text
 http://localhost:50000
 ```
 
-停止:
+Stop:
 
 ```bash
 docker compose down
 ```
 
-## 開発用起動
+## Development Run
 
-ソースをコンテナへマウントして、ローカル編集を反映しやすくしたい場合:
+If you want to mount the local source into the container so edits are reflected more easily:
 
 ```bash
 docker compose -f docker-compose.dev.yml up -d --build
 ```
 
-開く URL:
+Open:
 
 ```text
 http://localhost:50000
 ```
 
-停止:
+Stop:
 
 ```bash
 docker compose -f docker-compose.dev.yml down
 ```
 
-## 現行のポート設定
+## Current Port Mapping
 
-`docker-compose.yml` / `docker-compose.dev.yml` では、以下のようにバインドされています。
+`docker-compose.yml` and `docker-compose.dev.yml` use:
 
 ```text
 127.0.0.1:50000:8501
 ```
 
-- コンテナ内: `8501`
-- ホスト側: `50000`
-- `127.0.0.1` バインドなので LAN には公開されません
+- Inside the container: `8501`
+- On the host: `50000`
+- Because it is bound to `127.0.0.1`, it is not exposed to the LAN
 
-## 補足
+## Notes
 
-- アプリ本体の起動コマンドは `2pd_discrimination_streamlit_app.py` を前提にしています
-- ポート競合がある場合は、compose ファイルの左側ポートを変更してください
-  - 例: `127.0.0.1:51000:8501`
-- 反映が怪しい場合は `docker compose down` の後に再度 `up -d --build` を実行してください
+- The container starts `2pd_discrimination_streamlit_app.py`
+- If the port is already in use, change the left-side port in the compose file
+  - Example: `127.0.0.1:51000:8501`
+- If updates do not seem to apply, run `docker compose down` and then `docker compose up -d --build` again
