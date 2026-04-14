@@ -1327,13 +1327,14 @@ if trial is not None:
             elif mode == "test":
                 handle_test_answer("2点")
             st.rerun()
-    if st.button(
-        "ひとつ前に戻る",
-        use_container_width=True,
-        disabled=not bool(st.session_state.get("undo_stack")),
-    ):
-        undo_last_answer()
-        st.rerun()
+
+if st.button(
+    "ひとつ前に戻る",
+    use_container_width=True,
+    disabled=not bool(st.session_state.get("undo_stack")),
+):
+    undo_last_answer()
+    st.rerun()
 
 if st.session_state.get("last_feedback"):
     st.write(st.session_state["last_feedback"])
