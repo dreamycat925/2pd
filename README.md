@@ -55,6 +55,13 @@ The app provides:
 - A downloadable **TXT summary**
 - A downloadable **CSV log**
 
+## Undo
+
+- The examiner can press **ひとつ前に戻る** below the **1点 / 2点** buttons
+- This restores the full app state to just before the most recent answer entry
+- The button can be used repeatedly
+- It remains available even after **PASS** or **FAIL**, so the last answer can still be corrected
+
 ## Recommended Workflow
 
 1. Run **Practice**
