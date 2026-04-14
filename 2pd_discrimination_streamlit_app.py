@@ -69,10 +69,6 @@ UNDO_SNAPSHOT_KEYS = [
     "practice_state",
     "test_state",
     "post_state",
-    "selected_hand",
-    "selected_finger",
-    "main_series_name",
-    "main_random_seed_input",
 ]
 
 
